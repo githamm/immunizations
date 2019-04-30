@@ -149,14 +149,14 @@
                         <tr>
                             <th></th>
                             <th class="none">District</th>
-                            <th data-priority="3">School</th>
-                            <th>School type</th>
+                            <th data-priority="1">School</th>
+                            <th data-priority="2">School type</th>
                             <th class="none">School category</th>
-                            <th data-priority="4">Vaccine</th>
-                            <th data-priority="5">Immunized</th>
-                            <th>Medical</th>
-                            <th>Religious</th>
-                            <th>Personal</th>
+                            <th data-priority="3">Vaccine</th>
+                            <th data-priority="4">Immunized</th>
+                            <th data-priority="5">Medical</th>
+                            <th data-priority="6">Religious</th>
+                            <th data-priority="7">Personal</th>
                             <!-- <th class="none">Private</th> -->
                             <th class="none">Enrollment</th>
                             <th class="none">Compliance</th>
@@ -244,22 +244,58 @@
                     data: 'vaccine'
                 },
                 {
-                    data: 'fullyImmunizedPct'
-                    //visible: false
+                    data: 'fullyImmunizedPct',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
                 },
                 {
-                    data: 'medicalExemptionPct'
+                    data: 'medicalExemptionPct',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
                 },
                 {
-                    data: 'religiousExemptionPct'
+                    data: 'religiousExemptionPct',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
                 },
                 {
-                    data: 'personalExemptionPct'
+                    data: 'personalExemptionPct',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
                 },
                 {
                     data: 'enrollment'
                 },
-                { data: 'overallCompliancePct' }
+                {
+                    data: 'overallCompliancePct',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
+                }
             ],
 
             initComplete: function() {
