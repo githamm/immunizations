@@ -25,49 +25,431 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/yadcf/0.9.2/jquery.dataTables.yadcf.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#memListTable').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": 'getData.php'
-        });
-    });
-    </script>
-    <style>
-    .container {
-        padding: 20px;
-    }
-    </style>
-</head>
+
+    <head>
+        <style>
+        body {
+            background-color: #fafafa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #main-container {
+            /*width: 700px;
+    margin: 0 auto;*/
+        }
+
+        .table-title {
+            font-size: 2.3rem;
+            line-height: 35px;
+            font-weight: 700;
+        }
+
+        .instructions-text {
+            color: red;
+            font-size: .8em;
+            font-style: italic;
+            text-align: center;
+        }
+
+        #filters {
+            font-size: .85rem;
+        }
+
+        #lockdowns-table-container {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #immunization-table {
+            font-size: .85rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        button.yadcf-filter-reset-button {
+            color: red;
+            margin-left: 10px;
+        }
+
+        select {
+            margin-top: 7px;
+            margin-bottom: 0;
+            font-size: .85rem;
+        }
+
+        .dem {
+            background-color: lightblue;
+            width: 15px;
+            height: 15px;
+            margin-left: .5em;
+        }
+
+        .rep {
+            background-color: red;
+            width: 15px;
+            height: 15px;
+            margin-left: .5em;
+        }
+
+        .yadcf-filter-range {
+            height: 2.9em;
+            border: 1px solid silver;
+        }
+
+        .filter-text {
+            font-weight: bold;
+            margin-top: .5em;
+            margin-bottom: .5em;
+        }
+
+        p.source {
+            font-size: .9rem;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .herd {
+            color: red;
+        }
+        </style>
+    </head>
 
 <body>
-    <div class="container">
-        <table id="memListTable" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>button</th>
-                    <th>district</th>
-                    <th>schoolCategory</th>
-                    <th>facilityCompliance</th>
-                    <th>siteName</th>
-                    <th>schoolType</th>
-                    <th>fullyImmunized</th>
-                    <th>inProcess</th>
-                    <th>medicalExemption</th>
-                    <th>religiousExemption</th>
-                    <th>personalExemption</th>
-                    <th>incompleteRecord</th>
-                    <th>noRecord</th>
-                    <th>vaccine</th>
-                    <th>vaccineCompliance</th>
-                    <th>enrollment</th>
-                    <th>surveyStatus</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="main-container">
+        <div id="lockdowns-table-container">
+            <div class="row">
+                <div class="large-12 columns">
+                    <h2 class="table-title">Colorado School Immunization Database</h2>
+                    <p class="body-text">Chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter and chatter. <em><strong>Note: Due to data constraints, private schools are listed in the school districts in which they reside (but are not controlled by the district) &bull; kindergarten and preschools are not broken down by public or private &bull; schools with fewer than 20 students show * in place of enrollment</strong></em></p>
+                    <p class="instructions-text">Use dropdown menus or keyword search to filter table &bull; click column headers to sort</p>
+                </div>
+            </div>
+            <div id="filters">
+                <div class="row">
+                    <div class="large-2 medium-2 small-6 columns">
+                        <span id="filter-1" style="font-weight: bold;"></span>
+                    </div>
+                    <div class="large-2 medium-2 small-6 columns">
+                        <span id="filter-2" style="font-weight: bold;"></span>
+                    </div>
+                    <div class="large-2 medium-2 small-6 columns">
+                        <span id="filter-3" style="font-weight: bold;"></span>
+                    </div>
+                    <div class="large-2 medium-2 small-6 columns">
+                        <span id="filter-4" style="font-weight: bold;"></span>
+                    </div>
+                    <div class="large-2 medium-2 small-6 columns">
+                        <span id="filter-5" style="font-weight: bold;"></span>
+                    </div>
+                    <div class="large-2 medium-2 small-6 columns end">
+                        <span id="filter-6" style="font-weight: bold;"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+            <div class="large-6 medium-6 small-12 left columns">
+                <p class="filter-text">Filter by amount</p>
+                <span id="income-filter" style="font-weight: bold;"></span>
+            </div>
+        </div> -->
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <table id="immunization-table" class="display" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="none">ID</th>
+                            <th class="none">Location</th>
+                            <th data-priority="1">School</th>
+                            <th data-priority="2">School type</th>
+                            <th class="none">School category</th>
+                            <th data-priority="3">Vaccine</th>
+                            <th data-priority="4">Immunized</th>
+                            <th data-priority="5">Medical</th>
+                            <th data-priority="6">Religious</th>
+                            <th data-priority="7">Personal</th>
+                            <th data-priority="8">In process</th>
+                            <th class="none">Incomplete record</th>
+                            <th class="none">No record</th>
+                            <th class="none">Vaccine compliance</th>
+                            <th class="none">Facility compliance</th>
+                            <th class="none">Enrollment</th>
+                            <th class="none">Survey status</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <p class="source">Source: Colorado Department of Public Health and Environment</p>
+        </div>
     </div>
+    <script>
+    $(document).ready(function() {
+        // function disableDependentFilter(level, inuse) {
+        //     if (level < 4) {
+        //         filter = $('#yadcf-filter--example-' + level);
+        //         yadcf.exResetFilters(lockdownTable, [level]);
+        //         filter.prop('disabled', !inuse);
+
+        //         disableDependentFilter(level + 1, false);
+        //     }
+        // }
+
+        var lockdownTable = $('#immunization-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: 'getData.php'
+                // type: 'POST',
+                // dataSrc: 'data'
+            },
+
+            // deferRender: true,
+            // pageLength: 50,
+            responsive: {
+                details: {
+                    type: 'column'
+                }
+            },
+            // dom: '<if<t>lp>',
+            // // columnDefs: [{
+            // //     "defaultContent": "-",
+            // //     "targets": "_all"
+            // // }],
+            columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: 0
+                },
+                {
+                    targets: 1,
+                    visible: false
+                },
+                {
+                    targets: 3,
+                    render: function(data,type,row,meta) {
+                        return '<span style="color:red">' + data + '</span>'
+                    }
+                },
+                {
+                    targets: [ 7,8,9,10,11,12,13,14,15 ],
+                    render: function(data,type,row,meta) {
+                        return Math.round(data * 100) + '%'
+                    }
+                }
+            // {
+            //     type: 'date',
+            //     targets: 2
+            // }
+            ],
+            order: [
+                [6, 'asc']
+            ],
+            // columns: [
+            //     {
+            //         data: 'id'
+            //         //visible: false
+            //     },
+            //     {
+            //         data: 'district'
+            //         // render: function(data, type, row) {
+            //         //     if (data == 'DEM') {
+            //         //         return '<div class="dem">&nbsp;</div>'
+            //         //     } else if (data == 'REP') {
+            //         //         return '<div class="rep">&nbsp;</div>'
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'siteName'
+            //         // render: function(data, type, row) {
+            //         //     if (row.properties.letterUrl != '') {
+            //         //         return '<a href="' + row.properties.letterUrl + '" target="_blank">' + row.properties.date + '</a>'
+            //         //     } else {
+            //         //         return row.properties.date
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'schoolType'
+            //     },
+            //     {
+            //         data: 'schoolCategory'
+            //     },
+            //     {
+            //         data: 'vaccine'
+            //     },
+            //     {
+            //         data: 'fullyImmunized'
+            //         // render: function(data, type, row) {
+            //         //     if (isNaN(parseFloat(data))) {
+            //         //         return 'Incomplete'
+            //         //     } else if (data !== 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'medicalExemption'
+            //         // render: function(data, type, row) {
+            //         //     if (isNaN(parseFloat(data))) {
+            //         //         return 'Incomplete'
+            //         //     } else if (data !== 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'religiousExemption'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'personalExemption'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'inProcess'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'incompleteRecord'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'noRecord'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'vaccineCompliance'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'facilityCompliance'
+            //         // render: function(data, type, row) {
+            //         //     if (data != 0) {
+            //         //         return Math.round(data * 100) + '%'
+            //         //     } else {
+            //         //         return data
+            //         //     }
+            //         // }
+            //     },
+            //     {
+            //         data: 'enrollment'
+            //     },
+            //     {
+            //         data: 'surveyStatus',
+            //         visible: true
+            //     }
+            // ],
+
+            // rowCallback: function(row, data, index) {
+            //     if (data.fullyImmunized < .95) {
+            //         $(row).addClass("herd");
+            //     }
+            // },
+
+            // initComplete: function() {
+            //     yadcf.init(lockdownTable, [{
+            //             column_number: 1,
+            //             filter_container_id: 'filter-1',
+            //             filter_default_label: 'Choose district or county'
+            //         }, {
+            //             column_number: 3,
+            //             filter_container_id: 'filter-2',
+            //             filter_default_label: 'Choose school type'
+            //         },
+            //         {
+            //             column_number: 4,
+            //             filter_container_id: 'filter-3',
+            //             filter_default_label: 'Choose school category',
+            //             //column_data_type: 'rendered_html'
+            //         },
+            //         {
+            //             column_number: 2,
+            //             filter_container_id: 'filter-4',
+            //             filter_default_label: 'Choose school name',
+            //             //column_data_type: 'rendered_html'
+            //         },
+            //         {
+            //             column_number: 5,
+            //             filter_container_id: 'filter-5',
+            //             filter_default_label: 'Choose vaccine type',
+            //             //column_data_type: 'rendered_html'
+            //         },
+            //         {
+            //             column_number: 16,
+            //             filter_container_id: 'filter-6',
+            //             filter_default_label: 'Choose survey status',
+            //             //column_data_type: 'rendered_html'
+            //         }
+            //     ], {
+            //         cumulative_filtering: true,
+            //         filter_reset_button_text: 'Reset filter'
+            //     });
+
+            //     // get it started
+            //     disableDependentFilter(1, true);
+
+            //     $('.yadcf-filter-reset-button').on('click', function() {
+            //         level = parseInt(this.id.split('-')[4]);
+            //         disableDependentFilter(level, true);
+            //     });
+
+            //     $('.yadcf-filter').on('change', function() {
+            //         level = parseInt(this.id.slice(-1));
+            //         inuse = $(this).hasClass('inuse');
+
+            //         disableDependentFilter(level + 1, inuse);
+            //     });
+            // }
+        });
+        //       var filteredData = lockdownTable
+        //  .column(17)
+        //  .data()
+        //  .filter(function(value, index) {
+        //  return value == 'Not complete' ? true : false;
+        // });
+    });
+    </script>
 </body>
 
 </html>
