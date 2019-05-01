@@ -103,6 +103,10 @@
         text-align: right;
         font-style: italic;
     }
+
+    .herd {
+        color: red;
+    }
     </style>
 </head>
 
@@ -130,8 +134,11 @@
                     <div class="large-2 medium-2 small-6 columns">
                         <span id="filter-4" style="font-weight: bold;"></span>
                     </div>
-                    <div class="large-2 medium-2 small-6 columns end">
+                    <div class="large-2 medium-2 small-6 columns">
                         <span id="filter-5" style="font-weight: bold;"></span>
+                    </div>
+                    <div class="large-2 medium-2 small-6 columns end">
+                        <span id="filter-6" style="font-weight: bold;"></span>
                     </div>
                 </div>
             </div>
@@ -148,7 +155,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="none">District</th>
+                            <th class="none">Location</th>
                             <th data-priority="1">School</th>
                             <th data-priority="2">School type</th>
                             <th class="none">School category</th>
@@ -158,8 +165,13 @@
                             <th data-priority="6">Religious</th>
                             <th data-priority="7">Personal</th>
                             <!-- <th class="none">Private</th> -->
+                            <th data-priority="8">In process</th>
+                            <th class="none">Incomplete record</th>
+                            <th class="none">No record</th>
+                            <th class="none">Vaccine compliance</th>
+                            <th class="none">Facility compliance</th>
                             <th class="none">Enrollment</th>
-                            <th class="none">Compliance</th>
+                            <th class="none">Survey status</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -172,7 +184,7 @@
         </div>
     </div>
     <script>
-    var dataFile = 'immunization-data.json'
+    var dataFile = 'immunization-data.json';
 
     $(document).ready(function() {
         function disableDependentFilter(level, inuse) {
@@ -191,7 +203,7 @@
                 'dataSrc': ''
                 //'dataSrc': 'features'
             },
-            //deferRender: true,
+            // deferRender: true,
             pageLength: 50,
             responsive: {
                 details: {
@@ -244,7 +256,31 @@
                     data: 'vaccine'
                 },
                 {
-                    data: 'fullyImmunizedPct',
+                    data: 'fullyImmunized',
+                    render: function(data, type, row) {
+                        if (isNaN(parseFloat(data))) {
+                            return 'Incomplete'
+                        } else if (data !== 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'medicalExemption',
+                    render: function(data, type, row) {
+                        if (isNaN(parseFloat(data))) {
+                            return 'Incomplete'
+                        } else if (data !== 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'religiousExemption',
                     render: function(data, type, row) {
                         if (data != 0) {
                             return Math.round(data * 100) + '%'
@@ -254,7 +290,7 @@
                     }
                 },
                 {
-                    data: 'medicalExemptionPct',
+                    data: 'personalExemption',
                     render: function(data, type, row) {
                         if (data != 0) {
                             return Math.round(data * 100) + '%'
@@ -264,7 +300,7 @@
                     }
                 },
                 {
-                    data: 'religiousExemptionPct',
+                    data: 'inProcess',
                     render: function(data, type, row) {
                         if (data != 0) {
                             return Math.round(data * 100) + '%'
@@ -274,7 +310,37 @@
                     }
                 },
                 {
-                    data: 'personalExemptionPct',
+                    data: 'incompleteRecord',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'noRecord',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'vaccineCompliance',
+                    render: function(data, type, row) {
+                        if (data != 0) {
+                            return Math.round(data * 100) + '%'
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'facilityCompliance',
                     render: function(data, type, row) {
                         if (data != 0) {
                             return Math.round(data * 100) + '%'
@@ -287,16 +353,16 @@
                     data: 'enrollment'
                 },
                 {
-                    data: 'overallCompliancePct',
-                    render: function(data, type, row) {
-                        if (data != 0) {
-                            return Math.round(data * 100) + '%'
-                        } else {
-                            return data
-                        }
-                    }
+                    data: 'surveyStatus',
+                    visible: true
                 }
             ],
+
+            rowCallback: function(row, data, index) {
+                if (data.fullyImmunized < .95) {
+                    $(row).addClass("herd");
+                }
+            },
 
             initComplete: function() {
                 yadcf.init(lockdownTable, [{
@@ -325,6 +391,12 @@
                         filter_container_id: 'filter-5',
                         filter_default_label: 'Choose vaccine type',
                         //column_data_type: 'rendered_html'
+                    },
+                    {
+                        column_number: 16,
+                        filter_container_id: 'filter-6',
+                        filter_default_label: 'Choose survey status',
+                        //column_data_type: 'rendered_html'
                     }
                 ], {
                     cumulative_filtering: true,
@@ -347,6 +419,12 @@
                 });
             }
         });
+  //       var filteredData = lockdownTable
+		// 	.column(17)
+		// 	.data()
+		// 	.filter(function(value, index) {
+		// 	return value == 'Not complete' ? true : false;
+		// });
     });
     </script>
 </body>
