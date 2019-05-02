@@ -184,15 +184,15 @@
     </div>
     <script>
     $(document).ready(function() {
-        // function disableDependentFilter(level, inuse) {
-        //     if (level < 4) {
-        //         filter = $('#yadcf-filter--example-' + level);
-        //         yadcf.exResetFilters(lockdownTable, [level]);
-        //         filter.prop('disabled', !inuse);
+        function disableDependentFilter(level, inuse) {
+            if (level < 4) {
+                filter = $('#yadcf-filter--example-' + level);
+                yadcf.exResetFilters(lockdownTable, [level]);
+                filter.prop('disabled', !inuse);
 
-        //         disableDependentFilter(level + 1, false);
-        //     }
-        // }
+                disableDependentFilter(level + 1, false);
+            }
+        }
 
         var lockdownTable = $('#immunization-table').DataTable({
             processing: true,
@@ -387,60 +387,62 @@
             //     }
             // },
 
-            // initComplete: function() {
-            //     yadcf.init(lockdownTable, [{
-            //             column_number: 1,
-            //             filter_container_id: 'filter-1',
-            //             filter_default_label: 'Choose district or county'
-            //         }, {
-            //             column_number: 3,
-            //             filter_container_id: 'filter-2',
-            //             filter_default_label: 'Choose school type'
-            //         },
-            //         {
-            //             column_number: 4,
-            //             filter_container_id: 'filter-3',
-            //             filter_default_label: 'Choose school category',
-            //             //column_data_type: 'rendered_html'
-            //         },
-            //         {
-            //             column_number: 2,
-            //             filter_container_id: 'filter-4',
-            //             filter_default_label: 'Choose school name',
-            //             //column_data_type: 'rendered_html'
-            //         },
-            //         {
-            //             column_number: 5,
-            //             filter_container_id: 'filter-5',
-            //             filter_default_label: 'Choose vaccine type',
-            //             //column_data_type: 'rendered_html'
-            //         },
-            //         {
-            //             column_number: 16,
-            //             filter_container_id: 'filter-6',
-            //             filter_default_label: 'Choose survey status',
-            //             //column_data_type: 'rendered_html'
-            //         }
-            //     ], {
-            //         cumulative_filtering: true,
-            //         filter_reset_button_text: 'Reset filter'
-            //     });
+            initComplete: function() {
+                yadcf.init(lockdownTable, [{
+                        column_number: 2,
+                        filter_container_id: 'filter-1',
+                        filter_default_label: 'Choose district or county'
+                    },
+                    {
+                        column_number: 6,
+                        filter_container_id: 'filter-2',
+                        filter_default_label: 'Choose vaccine type'
+                    }
+                    ,
+                    // {
+                    //     column_number: 4,
+                    //     filter_container_id: 'filter-3',
+                    //     filter_default_label: 'Choose school category',
+                    //     //column_data_type: 'rendered_html'
+                    // },
+                    // {
+                    //     column_number: 2,
+                    //     filter_container_id: 'filter-4',
+                    //     filter_default_label: 'Choose school name',
+                    //     //column_data_type: 'rendered_html'
+                    // },
+                    // {
+                    //     column_number: 5,
+                    //     filter_container_id: 'filter-5',
+                    //     filter_default_label: 'Choose vaccine type',
+                    //     //column_data_type: 'rendered_html'
+                    // },
+                    // {
+                    //     column_number: 16,
+                    //     filter_container_id: 'filter-6',
+                    //     filter_default_label: 'Choose survey status',
+                    //     //column_data_type: 'rendered_html'
+                    // }
+                ], {
+                    cumulative_filtering: true,
+                    filter_reset_button_text: 'Reset filter'
+                });
 
-            //     // get it started
-            //     disableDependentFilter(1, true);
+                // get it started
+                disableDependentFilter(1, true);
 
-            //     $('.yadcf-filter-reset-button').on('click', function() {
-            //         level = parseInt(this.id.split('-')[4]);
-            //         disableDependentFilter(level, true);
-            //     });
+                $('.yadcf-filter-reset-button').on('click', function() {
+                    level = parseInt(this.id.split('-')[4]);
+                    disableDependentFilter(level, true);
+                });
 
-            //     $('.yadcf-filter').on('change', function() {
-            //         level = parseInt(this.id.slice(-1));
-            //         inuse = $(this).hasClass('inuse');
+                $('.yadcf-filter').on('change', function() {
+                    level = parseInt(this.id.slice(-1));
+                    inuse = $(this).hasClass('inuse');
 
-            //         disableDependentFilter(level + 1, inuse);
-            //     });
-            // }
+                    disableDependentFilter(level + 1, inuse);
+                });
+            }
         });
         //       var filteredData = lockdownTable
         //  .column(17)

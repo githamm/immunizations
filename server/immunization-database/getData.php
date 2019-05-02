@@ -93,3 +93,23 @@ require( 'ssp.class.php' );
 echo json_encode(
     SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
 );
+
+// From https://stackoverflow.com/questions/41507443/yadcf-datatables-server-side-populate-select-with-php
+
+// $data=SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, $extraWhere );
+
+// $db = SSP::sql_connect( $sql_details );
+// $stmt3 = $db->prepare( 'SELECT DISTINCT(value) FROM esito' );
+// $stmt3->execute();
+// $data['yadcf_data_3'] = $stmt3->fetchAll(PDO::FETCH_COLUMN, 0);
+
+// $stmt5 = $db->prepare( 'SELECT DISTINCT(value2) FROM table' );
+// $stmt5->execute();
+// $data['yadcf_data_5'] = $stmt5->fetchAll(PDO::FETCH_COLUMN, 0);
+
+// $stmt6 = $db->prepare( 'SELECT DISTINCT(value3) FROM table' );
+// $stmt6->execute();
+// $data['yadcf_data_6'] = $stmt6->fetchAll(PDO::FETCH_COLUMN, 0);
+
+
+// echo json_encode($data);
