@@ -83,10 +83,10 @@ $columns = array(
 // );
 
 $sql_details = array(
-    'user' => 'khamm',
-    'pass' => 'thelma99',
+    'user' => '',
+    'pass' => '',
     'db'   => 'immunization',
-    'host' => 'mydbinstance.cduaujz4vkzk.us-west-1.rds.amazonaws.com'
+    'host' => ''
 );
  
  
