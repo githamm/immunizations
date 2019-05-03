@@ -1,10 +1,10 @@
 <?php
 
 // $dbDetails = array(
-// 	'host' => 'localhost',
-// 	'user' => 'root',
-// 	'pass' => 'root',
-// 	'db' => 'coderworld'
+//  'host' => 'localhost',
+//  'user' => 'root',
+//  'pass' => 'root',
+//  'db' => 'coderworld'
 // );
 
 // $table = 'members';
@@ -12,17 +12,17 @@
 // $primaryKey = 'id';
 
 // $columns = array(
-// 	array( 'db' => 'first_name', 'dt' => 0),
-// 	array( 'db' => 'last_name', 'dt' => 1),
-// 	array( 'db' => 'email', 'dt' => 2),
-// 	array( 'db' => 'gender', 'dt' => 3),
-// 	array( 'db' => 'country', 'dt' => 4)
+//  array( 'db' => 'first_name', 'dt' => 0),
+//  array( 'db' => 'last_name', 'dt' => 1),
+//  array( 'db' => 'email', 'dt' => 2),
+//  array( 'db' => 'gender', 'dt' => 3),
+//  array( 'db' => 'country', 'dt' => 4)
 // );
 
 // require( 'ssp.class.php' );
 
 // echo json_encode(
-// 	SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns )
+//  SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns )
 // );
 
 /*
@@ -44,7 +44,7 @@
  */
  
 // DB table to use
-$table = 'members';
+$table = 'immunization_records';
  
 // Table's primary key
 $primaryKey = 'id';
@@ -75,11 +75,18 @@ $columns = array(
 );
  
 // SQL server connection information
+// $sql_details = array(
+//     'user' => 'root',
+//     'pass' => 'root',
+//     'db'   => 'immunization_test',
+//     'host' => 'localhost'
+// );
+
 $sql_details = array(
-    'user' => 'root',
-    'pass' => 'root',
-    'db'   => 'immunization_test',
-    'host' => 'localhost'
+    'user' => 'khamm',
+    'pass' => 'thelma99',
+    'db'   => 'immunization',
+    'host' => 'mydbinstance.cduaujz4vkzk.us-west-1.rds.amazonaws.com'
 );
  
  
@@ -96,12 +103,12 @@ echo json_encode(
 
 // From https://stackoverflow.com/questions/41507443/yadcf-datatables-server-side-populate-select-with-php
 
-// $data=SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, $extraWhere );
+// $data=SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns/*, $joinQuery, $extraWhere*/ );
 
 // $db = SSP::sql_connect( $sql_details );
-// $stmt3 = $db->prepare( 'SELECT DISTINCT(value) FROM esito' );
+// $stmt3 = $db->prepare( 'SELECT DISTINCT(district) FROM immunization.immunization_records' );
 // $stmt3->execute();
-// $data['yadcf_data_3'] = $stmt3->fetchAll(PDO::FETCH_COLUMN, 0);
+// $data['filter-1'] = $stmt3->fetchAll(PDO::FETCH_COLUMN, 0);
 
 // $stmt5 = $db->prepare( 'SELECT DISTINCT(value2) FROM table' );
 // $stmt5->execute();

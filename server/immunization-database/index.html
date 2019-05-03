@@ -161,14 +161,14 @@
                             <th class="none">ID</th>
                             <th class="none">Location</th>
                             <th data-priority="1">School</th>
-                            <th data-priority="2">School type</th>
-                            <th class="none">School category</th>
-                            <th data-priority="3">Vaccine</th>
-                            <th data-priority="4">Immunized</th>
-                            <th data-priority="5">Medical</th>
-                            <th data-priority="6">Religious</th>
-                            <th data-priority="7">Personal</th>
-                            <th data-priority="8">In process</th>
+                            <th data-priority="8">School category</th>
+                            <th class="none">School type</th>
+                            <th data-priority="2">Vaccine</th>
+                            <th data-priority="3">Immunized</th>
+                            <th data-priority="4">Medical exemption</th>
+                            <th data-priority="5">Religious exemption</th>
+                            <th data-priority="6">Personal exemption</th>
+                            <th data-priority="7">In process</th>
                             <th class="none">Incomplete record</th>
                             <th class="none">No record</th>
                             <th class="none">Vaccine compliance</th>
@@ -194,6 +194,12 @@
             }
         }
 
+        var districts = [{ value: 'Academy 20', label: 'Academy 20' }, { value: 'Adams 12 Five Star Schools', label: 'Adams 12 Five Star Schools' }, { value: 'Adams County', label: 'Adams County' }, { value: 'Adams County 14', label: 'Adams County 14' }, { value: 'Adams-Arapahoe 28J', label: 'Adams-Arapahoe 28J' }, { value: 'Aguilar Reorganized 6', label: 'Aguilar Reorganized 6' }, { value: 'Akron R-1', label: 'Akron R-1' }, { value: 'Alamosa County', label: 'Alamosa County' }, { value: 'Alamosa Re-11J', label: 'Alamosa Re-11J' }, { value: 'Arapahoe County', label: 'Arapahoe County' }, { value: 'Archuleta County', label: 'Archuleta County' }, { value: 'Archuleta County 50 JT', label: 'Archuleta County 50 JT' }, { value: 'Arickareer-R2', label: 'Arickareer-R2' }, { value: 'Arriba-Flagler C-20', label: 'Arriba-Flagler C-20' }, { value: 'Aspen 1', label: 'Aspen 1' }, { value: 'Ault-Highland RE-9', label: 'Ault-Highland RE-9' }, { value: 'Baca County', label: 'Baca County' }, { value: 'Bayfield 10 JT-R', label: 'Bayfield 10 JT-R' }, { value: 'Bennett 29J', label: 'Bennett 29J' }, { value: 'Bent County', label: 'Bent County' }, { value: 'Bethune R-5', label: 'Bethune R-5' }, { value: 'Big Sandy 100J', label: 'Big Sandy 100J' }, { value: 'Boulder County', label: 'Boulder County' }, { value: 'Boulder Valley RE 2', label: 'Boulder Valley RE 2' }, { value: 'Branson Reorganized 82', label: 'Branson Reorganized 82' }, { value: 'Briggsdale RE-10', label: 'Briggsdale RE-10' }, { value: 'Brighton School District', label: 'Brighton School District' }, { value: 'Broomfield County', label: 'Broomfield County' }, { value: 'Brush RE-2(J)', label: 'Brush RE-2(J)' }, { value: 'Buena Vista R-31', label: 'Buena Vista R-31' }, { value: 'Buffalo RE-4J', label: 'Buffalo RE-4J' }, { value: 'Burlington RE-6J', label: 'Burlington RE-6J' }, { value: 'Byers 32J', label: 'Byers 32J' }, { value: 'Calhan RJ-1', label: 'Calhan RJ-1' }, { value: 'Campo RE-6', label: 'Campo RE-6' }, { value: 'Canon City RE-1', label: 'Canon City RE-1' }, { value: 'Centennial Boces', label: 'Centennial Boces' }, { value: 'Centennial R-1', label: 'Centennial R-1' }, { value: 'Center 26 JT', label: 'Center 26 JT' }, { value: 'Chaffee County', label: 'Chaffee County' }, { value: 'Charter School Institute', label: 'Charter School Institute' }, { value: 'Cheraw 31', label: 'Cheraw 31' }, { value: 'Cherry Creek 5', label: 'Cherry Creek 5' }, { value: 'Cheyenne County', label: 'Cheyenne County' }, { value: 'Cheyenne County RE-5', label: 'Cheyenne County RE-5' }, { value: 'Cheyenne Mountain 12', label: 'Cheyenne Mountain 12' }, { value: 'Clear Creek County', label: 'Clear Creek County' }, { value: 'Clear Creek RE-1', label: 'Clear Creek RE-1' }, { value: 'Colorado Digital Boces', label: 'Colorado Digital Boces' }, { value: 'Colorado School For The Deaf And Blind', label: 'Colorado School For The Deaf And Blind' }, { value: 'Colorado Springs 11', label: 'Colorado Springs 11' }, { value: 'Conejos County', label: 'Conejos County' }, { value: 'Costilla County', label: 'Costilla County' }, { value: 'Cotopaxi RE-3', label: 'Cotopaxi RE-3' }, { value: 'Creede School District', label: 'Creede School District' }, { value: 'Cripple Creek-Victor RE-1', label: 'Cripple Creek-Victor RE-1' }, { value: 'Crowley County', label: 'Crowley County' }, { value: 'Crowley County RE-1-J', label: 'Crowley County RE-1-J' }, { value: 'Custer County', label: 'Custer County' }, { value: 'Custer County School District C-1', label: 'Custer County School District C-1' }, { value: 'De Beque 49JT', label: 'De Beque 49JT' }, { value: 'Deer Trail 26J', label: 'Deer Trail 26J' }, { value: 'Del Norte C-7', label: 'Del Norte C-7' }, { value: 'Delta County', label: 'Delta County' }, { value: 'Delta County 50(J)', label: 'Delta County 50(J)' }, { value: 'Denver County', label: 'Denver County' }, { value: 'Denver County 1', label: 'Denver County 1' }, { value: 'Dolores County', label: 'Dolores County' }, { value: 'Dolores County RE No.2', label: 'Dolores County RE No.2' }, { value: 'Dolores RE-4A', label: 'Dolores RE-4A' }, { value: 'Douglas County', label: 'Douglas County' }, { value: 'Douglas County RE 1', label: 'Douglas County RE 1' }, { value: 'Durango 9-R', label: 'Durango 9-R' }, { value: 'Eads RE-1', label: 'Eads RE-1' }, { value: 'Eagle County', label: 'Eagle County' }, { value: 'Eagle County RE 50', label: 'Eagle County RE 50' }, { value: 'East Grand 2', label: 'East Grand 2' }, { value: 'East Otero R-1', label: 'East Otero R-1' }, { value: 'Eaton RE-2', label: 'Eaton RE-2' }, { value: 'Edison 54 JT', label: 'Edison 54 JT' }, { value: 'El Paso County', label: 'El Paso County' }, { value: 'Elbert 200', label: 'Elbert 200' }, { value: 'Elbert County', label: 'Elbert County' }, { value: 'Elizabeth C-1', label: 'Elizabeth C-1' }, { value: 'Ellicott 22', label: 'Ellicott 22' }, { value: 'Englewood 1', label: 'Englewood 1' }, { value: 'Estes Park R-3', label: 'Estes Park R-3' }, { value: 'Expeditionary Boces', label: 'Expeditionary Boces' }, { value: 'Falcon 49', label: 'Falcon 49' }, { value: 'Fort Morgan RE-3', label: 'Fort Morgan RE-3' }, { value: 'Fountain 8', label: 'Fountain 8' }, { value: 'Fowler R-4J', label: 'Fowler R-4J' }, { value: 'Fremont County', label: 'Fremont County' }, { value: 'Fremont RE-2', label: 'Fremont RE-2' }, { value: 'Frenchman RE-3', label: 'Frenchman RE-3' }, { value: 'Garfield 16', label: 'Garfield 16' }, { value: 'Garfield County', label: 'Garfield County' }, { value: 'Garfield RE-2', label: 'Garfield RE-2' }, { value: 'Genoa-hugo C113', label: 'Genoa-hugo C113' }, { value: 'Gilpin County', label: 'Gilpin County' }, { value: 'Gilpin County RE-1', label: 'Gilpin County RE-1' }, { value: 'Granada RE-1', label: 'Granada RE-1' }, { value: 'Grand County', label: 'Grand County' }, { value: 'Greeley 6', label: 'Greeley 6' }, { value: 'Gunnison County', label: 'Gunnison County' }, { value: 'Gunnison Watershed RE1J', label: 'Gunnison Watershed RE1J' }, { value: 'Hanover 28', label: 'Hanover 28' }, { value: 'Harrison 2', label: 'Harrison 2' }, { value: 'Haxtun RE-2J', label: 'Haxtun RE-2J' }, { value: 'Hayden RE-1', label: 'Hayden RE-1' }, { value: 'Hi-plains R-23', label: 'Hi-plains R-23' }, { value: 'Hinsdale County', label: 'Hinsdale County' }, { value: 'Hinsdale County RE 1', label: 'Hinsdale County RE 1' }, { value: 'Hoehne Reorganized 3', label: 'Hoehne Reorganized 3' }, { value: 'Holly RE-3', label: 'Holly RE-3' }, { value: 'Holyoke RE-1J', label: 'Holyoke RE-1J' }, { value: 'Huerfano County', label: 'Huerfano County' }, { value: 'Huerfano RE-1', label: 'Huerfano RE-1' }, { value: 'Idalia RJ-3', label: 'Idalia RJ-3' }, { value: 'Ignacio 11 JT', label: 'Ignacio 11 JT' }, { value: 'Jackson County', label: 'Jackson County' }, { value: 'Jefferson County', label: 'Jefferson County' }, { value: 'Jefferson County R-1', label: 'Jefferson County R-1' }, { value: 'Johnstown-milliken RE-5J', label: 'Johnstown-milliken RE-5J' }, { value: 'Julesburg RE-1', label: 'Julesburg RE-1' }, { value: 'Karval RE-23', label: 'Karval RE-23' }, { value: 'Kim Reorganized 88', label: 'Kim Reorganized 88' }, { value: 'Kiowa C-2', label: 'Kiowa C-2' }, { value: 'Kiowa County', label: 'Kiowa County' }, { value: 'Kit Carson County', label: 'Kit Carson County' }, { value: 'Kit Carson R-1', label: 'Kit Carson R-1' }, { value: 'La Plata County', label: 'La Plata County' }, { value: 'La Veta RE-2', label: 'La Veta RE-2' }, { value: 'Lake County', label: 'Lake County' }, { value: 'Lake County R-1', label: 'Lake County R-1' }, { value: 'Lamar RE-2', label: 'Lamar RE-2' }, { value: 'Larimer County', label: 'Larimer County' }, { value: 'Las Animas County', label: 'Las Animas County' }, { value: 'Las Animas RE-1', label: 'Las Animas RE-1' }, { value: 'Lewis-Palmer 38', label: 'Lewis-Palmer 38' }, { value: 'Liberty J-4', label: 'Liberty J-4' }, { value: 'Limon RE-4J', label: 'Limon RE-4J' }, { value: 'Lincoln County', label: 'Lincoln County' }, { value: 'Littleton 6', label: 'Littleton 6' }, { value: 'Logan County', label: 'Logan County' }, { value: 'Lone Star 101', label: 'Lone Star 101' }, { value: 'Mancos RE-6', label: 'Mancos RE-6' }, { value: 'Manitou Springs 14', label: 'Manitou Springs 14' }, { value: 'Manzanola 3J', label: 'Manzanola 3J' }, { value: 'Mapleton 1', label: 'Mapleton 1' }, { value: 'Mc Clave RE-2', label: 'Mc Clave RE-2' }, { value: 'Meeker RE1', label: 'Meeker RE1' }, { value: 'Mesa County', label: 'Mesa County' }, { value: 'Mesa County Valley 51', label: 'Mesa County Valley 51' }, { value: 'Miami/Yoder 60 JT', label: 'Miami/Yoder 60 JT' }, { value: 'Mineral County', label: 'Mineral County' }, { value: 'Moffat 2', label: 'Moffat 2' }, { value: 'Moffat County', label: 'Moffat County' }, { value: 'Moffat County RE-1', label: 'Moffat County RE-1' }, { value: 'Monte Vista C-8', label: 'Monte Vista C-8' }, { value: 'Montezuma County', label: 'Montezuma County' }, { value: 'Montezuma-Cortez RE-1', label: 'Montezuma-Cortez RE-1' }, { value: 'Montrose County', label: 'Montrose County' }, { value: 'Montrose County RE-1j', label: 'Montrose County RE-1j' }, { value: 'Morgan County', label: 'Morgan County' }, { value: 'Mountain Boces', label: 'Mountain Boces' }, { value: 'Mountain Valley RE 1', label: 'Mountain Valley RE 1' }, { value: 'North Conejos RE-1J', label: 'North Conejos RE-1J' }, { value: 'North Park R-1', label: 'North Park R-1' }, { value: 'Norwood R-2J', label: 'Norwood R-2J' }, { value: 'Otero County', label: 'Otero County' }, { value: 'Otis R-3', label: 'Otis R-3' }, { value: 'Ouray County', label: 'Ouray County' }, { value: 'Ouray R-1', label: 'Ouray R-1' }, { value: 'Park County', label: 'Park County' }, { value: 'Park County RE-2', label: 'Park County RE-2' }, { value: 'Pawnee RE-12', label: 'Pawnee RE-12' }, { value: 'Peyton 23 JT', label: 'Peyton 23 JT' }, { value: 'Phillips County', label: 'Phillips County' }, { value: 'Pitkin County', label: 'Pitkin County' }, { value: 'Plainview RE-2', label: 'Plainview RE-2' }, { value: 'Plateau RE-5', label: 'Plateau RE-5' }, { value: 'Plateau Valley 50', label: 'Plateau Valley 50' }, { value: 'Platte Canyon 1', label: 'Platte Canyon 1' }, { value: 'Platte Valley RE-7', label: 'Platte Valley RE-7' }, { value: 'Poudre R-1', label: 'Poudre R-1' }, { value: 'Prairie RE-11', label: 'Prairie RE-11' }, { value: 'Primero Reorganized 2', label: 'Primero Reorganized 2' }, { value: 'Pritchett RE-3', label: 'Pritchett RE-3' }, { value: 'Prowers County', label: 'Prowers County' }, { value: 'Pueblo City 60', label: 'Pueblo City 60' }, { value: 'Pueblo County', label: 'Pueblo County' }, { value: 'Pueblo County 70', label: 'Pueblo County 70' }, { value: 'Rangely RE-4', label: 'Rangely RE-4' }, { value: 'Revere School District', label: 'Revere School District' }, { value: 'Ridgway R-2', label: 'Ridgway R-2' }, { value: 'Rio Blanco County', label: 'Rio Blanco County' }, { value: 'Rio Grande County', label: 'Rio Grande County' }, { value: 'Roaring Fork RE-1', label: 'Roaring Fork RE-1' }, { value: 'Rocky Ford R-2', label: 'Rocky Ford R-2' }, { value: 'Routt County', label: 'Routt County' }, { value: 'Saguache County', label: 'Saguache County' }, { value: 'Salida R-32', label: 'Salida R-32' }, { value: 'San Juan County', label: 'San Juan County' }, { value: 'San Miguel County', label: 'San Miguel County' }, { value: 'Sanford 6J', label: 'Sanford 6J' }, { value: 'Sangre De Cristo RE-22J', label: 'Sangre De Cristo RE-22J' }, { value: 'Sargent RE-33J', label: 'Sargent RE-33J' }, { value: 'Sedgwick County', label: 'Sedgwick County' }, { value: 'Sheridan 2', label: 'Sheridan 2' }, { value: 'Sierra Grande R-30', label: 'Sierra Grande R-30' }, { value: 'Silverton 1', label: 'Silverton 1' }, { value: 'South Conejos RE-10', label: 'South Conejos RE-10' }, { value: 'South Routt RE 3', label: 'South Routt RE 3' }, { value: 'Springfield RE-4', label: 'Springfield RE-4' }, { value: 'St Vrain Valley Re 1J', label: 'St Vrain Valley Re 1J' }, { value: 'Steamboat Springs RE-2', label: 'Steamboat Springs RE-2' }, { value: 'Strasburg 31J', label: 'Strasburg 31J' }, { value: 'Stratton R-4', label: 'Stratton R-4' }, { value: 'Summit County', label: 'Summit County' }, { value: 'Summit RE-1', label: 'Summit RE-1' }, { value: 'Swink 33', label: 'Swink 33' }, { value: 'Teller County', label: 'Teller County' }, { value: 'Telluride R-1', label: 'Telluride R-1' }, { value: 'Thompson R2-J', label: 'Thompson R2-J' }, { value: 'Trinidad 1', label: 'Trinidad 1' }, { value: 'Valley RE-1', label: 'Valley RE-1' }, { value: 'Vilas RE-5', label: 'Vilas RE-5' }, { value: 'Walsh RE-1', label: 'Walsh RE-1' }, { value: 'Washington County', label: 'Washington County' }, { value: 'Weld County', label: 'Weld County' }, { value: 'Weld County RE-1', label: 'Weld County RE-1' }, { value: 'Weld County S/d RE-8', label: 'Weld County S/d RE-8' }, { value: 'Weld County School District RE-3J', label: 'Weld County School District RE-3J' }, { value: 'Weldon Valley RE-20(J)', label: 'Weldon Valley RE-20(J)' }, { value: 'West End RE-2', label: 'West End RE-2' }, { value: 'West Grand 1-JT', label: 'West Grand 1-JT' }, { value: 'Westminster Public Schools', label: 'Westminster Public Schools' }, { value: 'Widefield 3', label: 'Widefield 3' }, { value: 'Wiggins RE-50(J)', label: 'Wiggins RE-50(J)' }, { value: 'Wiley RE-13 JT', label: 'Wiley RE-13 JT' }, { value: 'Windsor RE-4', label: 'Windsor RE-4' }, { value: 'Woodland Park RE-2', label: 'Woodland Park RE-2' }, { value: 'Woodlin R-104', label: 'Woodlin R-104' }, { value: 'Wray RD-2', label: 'Wray RD-2' }, { value: 'Yuma 1', label: 'Yuma 1' }, { value: 'Yuma County', label: 'Yuma County' }];
+        var schoolCategory = [{ value: 'Child Care/Preschool', label: 'Child Care/Preschool' }, { value: 'Kindergarten', label: 'Kindergarten' }, { value: 'Private School', label: 'Private School' }, { value: 'Public School', label: 'Public School' }]
+        var schoolType = [{ value: 'Alternative', label: 'Alternative' }, { value: 'Charter', label: 'Charter' }, { value: 'Magnet', label: 'Magnet' }, { value: 'Regular', label: 'Regular' }];
+        var vaccinations = [{ value: 'DTaP', label: 'DTaP' }, { value: 'HepB', label: 'HepB' }, { value: 'HIB', label: 'HIB' }, { value: 'MMR', label: 'MMR' }, { value: 'PCV13', label: 'PCV13' }, { value: 'Polio', label: 'Polio' }, { value: 'Tdap', label: 'Tdap' }, { value: 'Varicella', label: 'Varicella' }];
+        var surveyStatus = [{ value: 'Completed', label: 'Completed' }, { value: 'Not Completed', label: 'Not Completed' }];
+
         var lockdownTable = $('#immunization-table').DataTable({
             processing: true,
             serverSide: true,
@@ -204,18 +210,18 @@
             },
 
             // deferRender: true,
-            // pageLength: 50,
+            pageLength: 25,
             responsive: {
                 details: {
                     type: 'column'
                 }
             },
-            // dom: '<if<t>lp>',
-            // // columnDefs: [{
-            // //     "defaultContent": "-",
-            // //     "targets": "_all"
-            // // }],
+            dom: '<if<t>lp>',
             columnDefs: [{
+                    defaultContent: '-',
+                    targets: '_all'
+                },
+                {
                     className: 'control',
                     orderable: false,
                     targets: 0
@@ -226,179 +232,51 @@
                 },
                 {
                     targets: 3,
-                    render: function(data,type,row,meta) {
+                    render: function(data, type, row, meta) {
                         return '<span style="color:red">' + data + '</span>'
                     }
                 },
                 {
-                    targets: [ 7,8,9,10,11,12,13,14,15 ],
-                    render: function(data,type,row,meta) {
+                    targets: [7, 8, 9, 10, 11, 12, 13, 14, 15],
+                    render: function(data, type, row, meta) {
                         return Math.round(data * 100) + '%'
                     }
                 }
-            // {
-            //     type: 'date',
-            //     targets: 2
-            // }
             ],
             order: [
-                [6, 'asc']
+                [3, 'asc']
             ],
-            // columns: [
-            //     {
-            //         data: 'id'
-            //         //visible: false
-            //     },
-            //     {
-            //         data: 'district'
-            //         // render: function(data, type, row) {
-            //         //     if (data == 'DEM') {
-            //         //         return '<div class="dem">&nbsp;</div>'
-            //         //     } else if (data == 'REP') {
-            //         //         return '<div class="rep">&nbsp;</div>'
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'siteName'
-            //         // render: function(data, type, row) {
-            //         //     if (row.properties.letterUrl != '') {
-            //         //         return '<a href="' + row.properties.letterUrl + '" target="_blank">' + row.properties.date + '</a>'
-            //         //     } else {
-            //         //         return row.properties.date
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'schoolType'
-            //     },
-            //     {
-            //         data: 'schoolCategory'
-            //     },
-            //     {
-            //         data: 'vaccine'
-            //     },
-            //     {
-            //         data: 'fullyImmunized'
-            //         // render: function(data, type, row) {
-            //         //     if (isNaN(parseFloat(data))) {
-            //         //         return 'Incomplete'
-            //         //     } else if (data !== 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'medicalExemption'
-            //         // render: function(data, type, row) {
-            //         //     if (isNaN(parseFloat(data))) {
-            //         //         return 'Incomplete'
-            //         //     } else if (data !== 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'religiousExemption'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'personalExemption'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'inProcess'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'incompleteRecord'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'noRecord'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'vaccineCompliance'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'facilityCompliance'
-            //         // render: function(data, type, row) {
-            //         //     if (data != 0) {
-            //         //         return Math.round(data * 100) + '%'
-            //         //     } else {
-            //         //         return data
-            //         //     }
-            //         // }
-            //     },
-            //     {
-            //         data: 'enrollment'
-            //     },
-            //     {
-            //         data: 'surveyStatus',
-            //         visible: true
-            //     }
-            // ],
-
-            // rowCallback: function(row, data, index) {
-            //     if (data.fullyImmunized < .95) {
-            //         $(row).addClass("herd");
-            //     }
-            // },
-
             initComplete: function() {
                 yadcf.init(lockdownTable, [{
                         column_number: 2,
                         filter_container_id: 'filter-1',
-                        filter_default_label: 'Choose district or county'
+                        filter_default_label: 'Choose district or county',
+                        data: districts
+                    },
+                    {
+                        column_number: 4,
+                        filter_container_id: 'filter-2',
+                        filter_default_label: 'Choose school category',
+                        data: schoolCategory
+                    },
+                    {
+                        column_number: 5,
+                        filter_container_id: 'filter-3',
+                        filter_default_label: 'Choose school type',
+                        data: schoolType
                     },
                     {
                         column_number: 6,
-                        filter_container_id: 'filter-2',
-                        filter_default_label: 'Choose vaccine type'
+                        filter_container_id: 'filter-4',
+                        filter_default_label: 'Choose vaccine type',
+                        data: vaccinations
+                    },
+                    {
+                        column_number: 17,
+                        filter_container_id: 'filter-5',
+                        filter_default_label: 'Choose survey status',
+                        data: surveyStatus
                     }
-                    ,
                     // {
                     //     column_number: 4,
                     //     filter_container_id: 'filter-3',
