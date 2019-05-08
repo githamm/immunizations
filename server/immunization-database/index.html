@@ -231,9 +231,14 @@
                     visible: false
                 },
                 {
-                    targets: 3,
+                    targets: [3, 6, 7],
                     render: function(data, type, row, meta) {
-                        return '<span style="color:red">' + data + '</span>'
+                        console.log(row);
+                        if (row[6] == 'MMR' && row[7] > .95) {
+                            return '<span style="color:#cb181d">' + data + '</span>'
+                        } else {
+                            return data
+                        }
                     }
                 },
                 {

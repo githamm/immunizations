@@ -44,7 +44,7 @@
  */
  
 // DB table to use
-$table = 'immunization_records';
+$table = 'vaccine';
  
 // Table's primary key
 $primaryKey = 'id';
@@ -74,21 +74,20 @@ $columns = array(
     array( 'db' => 'surveyStatus', 'dt' => 17 )
 );
  
-// SQL server connection information
+// SQL server connection information - plus server
 // $sql_details = array(
-//     'user' => 'root',
-//     'pass' => 'root',
+//     'user' => 'user_here',
+//     'pass' => 'password_here',
 //     'db'   => 'immunization_test',
 //     'host' => 'localhost'
 // );
 
 $sql_details = array(
-    'user' => 'khamm',
-    'pass' => 'thelma99',
-    'db'   => 'immunization',
-    'host' => 'mydbinstance.cduaujz4vkzk.us-west-1.rds.amazonaws.com'
-);
- 
+    'user' => 'root',
+    'pass' => 'root',
+    'db'   => 'immunization_test',
+    'host' => 'localhost'
+); 
  
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
