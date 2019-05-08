@@ -85,7 +85,7 @@ $columns = array(
 $sql_details = array(
     'user' => 'root',
     'pass' => 'root',
-    'db'   => 'immunization_test',
+    'db'   => 'immunization_test_3',
     'host' => 'localhost'
 );
  

@@ -198,7 +198,7 @@
         var schoolCategory = [{ value: 'Child Care/Preschool', label: 'Child Care/Preschool' }, { value: 'Kindergarten', label: 'Kindergarten' }, { value: 'Private School', label: 'Private School' }, { value: 'Public School', label: 'Public School' }]
         var schoolType = [{ value: 'Alternative', label: 'Alternative' }, { value: 'Charter', label: 'Charter' }, { value: 'Magnet', label: 'Magnet' }, { value: 'Regular', label: 'Regular' }];
         var vaccinations = [{ value: 'DTaP', label: 'DTaP' }, { value: 'HepB', label: 'HepB' }, { value: 'HIB', label: 'HIB' }, { value: 'MMR', label: 'MMR' }, { value: 'PCV13', label: 'PCV13' }, { value: 'Polio', label: 'Polio' }, { value: 'Tdap', label: 'Tdap' }, { value: 'Varicella', label: 'Varicella' }];
-        var surveyStatus = [{ value: 'Completed', label: 'Completed' }, { value: 'Not Completed', label: 'Not Completed' }];
+        var surveyStatus = [{ value: 'Completed', label: 'Completed' }, { value: 'Incomplete', label: 'Incomplete' }];
 
         var lockdownTable = $('#immunization-table').DataTable({
             processing: true,
@@ -231,10 +231,9 @@
                     visible: false
                 },
                 {
-                    targets: [3, 6, 7],
+                    targets: [3, 4, 6],
                     render: function(data, type, row, meta) {
-                        console.log(row);
-                        if (row[6] == 'MMR' && row[7] > .95) {
+                        if (row[6] == 'MMR' && row[7] < .95) {
                             return '<span style="color:#cb181d">' + data + '</span>'
                         } else {
                             return data
@@ -242,9 +241,25 @@
                     }
                 },
                 {
-                    targets: [7, 8, 9, 10, 11, 12, 13, 14, 15],
+                    targets: [7, 8, 9, 10, 11, 12, 13, 14],
                     render: function(data, type, row, meta) {
-                        return Math.round(data * 100) + '%'
+                        if (row[6] == '-') {
+                            return '-'
+                        } else if (row[6] == 'MMR' && row[7] < .95) {
+                            return '<span style="color:#cb181d">' + Math.round(data * 100) + '%' + '</span>'
+                        } else {
+                            return Math.round(data * 100) + '%'
+                        }
+                    }
+                },
+                {
+                    targets: [/*8, 9, 10, 11, 12, 13, 14, */15],
+                    render: function(data, type, row, meta) {
+                        if (row[7] == '-') {
+                            return '-'
+                        } else {
+                            return Math.round(data * 100) + '%'
+                        }
                     }
                 }
             ],
