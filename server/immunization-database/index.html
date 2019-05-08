@@ -187,7 +187,7 @@
         function disableDependentFilter(level, inuse) {
             if (level < 4) {
                 filter = $('#yadcf-filter--example-' + level);
-                yadcf.exResetFilters(lockdownTable, [level]);
+                yadcf.exResetFilters(immunizationTable, [level]);
                 filter.prop('disabled', !inuse);
 
                 disableDependentFilter(level + 1, false);
@@ -200,7 +200,7 @@
         var vaccinations = [{ value: 'DTaP', label: 'DTaP' }, { value: 'HepB', label: 'HepB' }, { value: 'HIB', label: 'HIB' }, { value: 'MMR', label: 'MMR' }, { value: 'PCV13', label: 'PCV13' }, { value: 'Polio', label: 'Polio' }, { value: 'Tdap', label: 'Tdap' }, { value: 'Varicella', label: 'Varicella' }];
         var surveyStatus = [{ value: 'Completed', label: 'Completed' }, { value: 'Incomplete', label: 'Incomplete' }];
 
-        var lockdownTable = $('#immunization-table').DataTable({
+        var immunizationTable = $('#immunization-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -208,9 +208,9 @@
                 // type: 'POST',
                 // dataSrc: 'data'
             },
-
-            // deferRender: true,
-            pageLength: 25,
+            scrollY: '600px',
+            //deferRender: true,
+            pageLength: 50,
             responsive: {
                 details: {
                     type: 'column'
@@ -246,9 +246,9 @@
                         if (row[6] == '-') {
                             return '-'
                         } else if (row[6] == 'MMR' && row[7] < .95) {
-                            return '<span style="color:#cb181d">' + Math.round(data * 100) + '%' + '</span>'
+                            return '<span style="color:#cb181d">' + (data * 100).toFixed(1) + '%' + '</span>'
                         } else {
-                            return Math.round(data * 100) + '%'
+                            return (data * 100).toFixed(1) + '%'
                         }
                     }
                 },
@@ -258,7 +258,7 @@
                         if (row[7] == '-') {
                             return '-'
                         } else {
-                            return Math.round(data * 100) + '%'
+                            return (data * 100).toFixed(1) + '%'
                         }
                     }
                 }
@@ -267,7 +267,7 @@
                 [3, 'asc']
             ],
             initComplete: function() {
-                yadcf.init(lockdownTable, [{
+                yadcf.init(immunizationTable, [{
                         column_number: 2,
                         filter_container_id: 'filter-1',
                         filter_default_label: 'Choose district or county',
@@ -342,7 +342,7 @@
                 });
             }
         });
-        //       var filteredData = lockdownTable
+        //       var filteredData = immunizationTable
         //  .column(17)
         //  .data()
         //  .filter(function(value, index) {

@@ -75,19 +75,19 @@ $columns = array(
 );
  
 // SQL server connection information - plus server
-// $sql_details = array(
-//     'user' => 'user_here',
-//     'pass' => 'password_here',
-//     'db'   => 'immunization_test',
-//     'host' => 'localhost'
-// );
-
 $sql_details = array(
-    'user' => 'root',
-    'pass' => 'root',
-    'db'   => 'immunization_test_3',
+    'user' => 'user name here',
+    'pass' => 'password here',
+    'db'   => 'immunization',
     'host' => 'localhost'
 );
+
+// $sql_details = array(
+//     'user' => 'root',
+//     'pass' => 'root',
+//     'db'   => 'immunization',
+//     'host' => 'localhost'
+// );
  
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
