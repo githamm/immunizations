@@ -144,6 +144,12 @@
             font-size: 1.3rem;
             font-weight: 700;
         }
+
+        .modal-subtitle {
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, .8);
+            margin-bottom: 4px;
+        }
         </style>
     </head>
 
@@ -161,7 +167,7 @@
             <div id="filters">
                 <div class="row">
                     <div class="large-2 medium-2 small-6 columns">
-                        <p id="filter-1"><span class="filter-description">Choose location</span></p>
+                        <p id="filter-1"><span class="filter-description">Choose school district or county</span></p>
                     </div>
                     <div class="large-2 medium-2 small-6 columns">
                         <p id="filter-2"><span class="filter-description">Choose school category</span></p>
@@ -185,11 +191,11 @@
             </div>
             <div class="reveal" id="info-modal" data-reveal>
                 <h3 class="modal-title">About the School Immunization Database</h3>
-                <p>Colorado law requires students attending schools and licensed child cares to be vaccinated against certain diseases unless an exemption is filed. The data is self-reported by schools and child care centers in response to a survey sent by the Colorado Department of Public Health and Environment.</p>
-                <p><strong>Filter information</strong></p>
+                <p>Colorado law requires students attending schools and licensed child care centers to be vaccinated against certain diseases unless a medical, religious or personal exemption is filed. The data is self-reported by schools and child care centers in response to a survey sent by the Colorado Department of Public Health and Environment.</p>
+                <p class="modal-subtitle"><strong>Filter information</strong></p>
                 <p><strong>Location</strong><br>
                     <em>District or county</em><br>
-                    Due to data constraints, public <em>and</em> private schools are grouped within school districts, but private schools have no affiliation with the school districts. Child care centers and preschools are listed separately within counties, even if they are affiliated with a school.</p>
+                    Due to data constraints, private schools are grouped in the school district in which they reside, but have no affiliation with the districts -- it's purely a geographical categorization.For example, Regis Jesuit High School would be found under Cherry Creek 5 rather than Arapahoe County. Child care centers and preschools are listed separately within counties, even if they are affiliated with a school.</p>
                 <p><strong>School category</strong><br>
                     <em>Child care/preschool &bull; kindergarten &bull; private school &bull; public school</em><br>
                     Data for public and private schools is for all grades <em>except</em> preschools and kindergarten, which can be filtered by themselves.</p>
@@ -201,12 +207,18 @@
                 <p><strong>Survey status</strong><br>
                     <em>Complete &bull; incomplete</em><br>
                     Indicates whether a facility completed the Colorado Department of Public Health and Environment immunization survey. The database is pre-filtered to show only facilities that have completed the survey; choose "Incomplete" to see facilities that have not completed the survey.</p>
-                <p><strong>ADD INFORMATION ABOUT OTHER FIELDS: RATES, ETC.</strong>
-                    <p><strong>Other notes</strong><br>
-                        Schools with fewer than 20 students show * in place of enrollment to protect privacy.</p>
-                    <button class="close-button" data-close aria-label="Close modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <p class="modal-subtitle"><strong>Explanation of data fields</strong></p>
+                <p><strong>Immunized:</strong> Percent of students immunized with that particular vaccine.<br>
+                    <strong>Medical, religious, personal exemptions:</strong> Percent of students who have filed an exemption for the vaccination.<br>
+                    <strong>In process:</strong> Percent of students who are in the process of completing the immunization requirements.<br>
+                    <strong>Incomplete record:</strong> Percent of students whose immunization record isn't complete.<br>
+                    <strong>No record:</strong> Percent of students who have no immunization record on file.<br>
+                    <strong>Vaccine compliance:</strong> Percent of students who have immunization records and/or exemptions on file for a particular vaccine.<br>
+                    <strong>Facility compliance:</strong> Percent of students who have immunization records and/or exemptions on file for all required vaccinations.<br>
+                    <strong>Enrollment:</strong> Number of students enrolled in the facility for that grade group. Enrollments of fewer than 20 students are indicated with * to protect privacy.</p>
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="row">
                 <div class="large-12 columns">
