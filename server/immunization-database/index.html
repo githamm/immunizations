@@ -34,10 +34,10 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        #main-container {
+        /*#main-container {
             width: 900px;
             margin: 0 auto;
-        }
+        }*/
 
         .table-title {
             font-size: 2.3rem;
@@ -46,7 +46,7 @@
         }
 
         .instructions-text {
-            color: red;
+            color: #ec5840;
             font-size: .8em;
             font-style: italic;
             text-align: center;
@@ -67,7 +67,7 @@
         }
 
         button.yadcf-filter-reset-button {
-            color: red;
+            color: #ec5840;
             margin-left: 10px;
         }
 
@@ -150,12 +150,18 @@
             color: rgba(0, 0, 0, .8);
             margin-bottom: 4px;
         }
+
+        .info-button {
+        	text-transform: uppercase;
+        	font-weight: bold;
+        	padding: 8px;
+        }
         </style>
     </head>
 
 <body>
     <div id="main-container">
-        <div class="topcorner"><a data-open="info-modal"><img src="info-64.png"></a></div>
+        <div class="topcorner"><a data-open="info-modal"><button type="button" class="alert button info-button">Information</button></a></div>
         <div id="lockdowns-table-container">
             <div class="row">
                 <div class="large-12 columns">
@@ -165,7 +171,6 @@
                     <p>Colorado has one of the lowest immunization rates for the measles, mumps and rubella (MMR) vaccine. Only 88.7 percent of kindergarteners received the measles, mumps and rubella vaccine during the 2017-2018 school year, meaning the state misses the threshold needed for “herd immunity,” according to the U.S. Centers for Disease Control.</p>
                     <p>A community needs to have “herd immunity” for a population to be protected from a measles outbreak. The state health department puts the threshold for “herd immunity” at 92 to 94 percent. However, some health experts say at least a 95 percent vaccination rate is needed to keep a population safe from measles.</p>
                     <p>In the database, schools are highlighted in red if they miss the 95 percent threshold needed for MMR herd immunity.</p>
-                    <p><strong>Click the blue icon at the top right of the page for information.</strong></p>
                     <p class="instructions-text">Use dropdown menus or keyword search to filter table &bull; click column headers to sort</p>
                 </div>
             </div>
@@ -219,7 +224,7 @@
                     <strong>Incomplete record:</strong> Percent of students whose immunization record isn't complete.<br>
                     <strong>No record:</strong> Percent of students who have no immunization record on file.<br>
                     <strong>Vaccine compliance:</strong> Percent of students who have immunization records and/or exemptions on file for a particular vaccine.<br>
-                    <strong>Facility compliance:</strong> Percent of students who have immunization records and/or exemptions on file for all required vaccinations.<br>
+                    <strong>Facility compliance:</strong> Percent of students who have immunization, in-process or exemption records on file for all required vaccinations.<br>
                     <strong>Enrollment:</strong> Number of students enrolled in the facility for that grade group. Enrollments of fewer than 20 students are indicated with * to protect privacy.</p>
                 <button class="close-button" data-close aria-label="Close modal" type="button">
                     <span aria-hidden="true">&times;</span>
