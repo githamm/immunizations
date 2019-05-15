@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Immunization Test</title>
+    <title>Colorado Schools Immunization Database</title>
     <meta charset="utf-8">
     <meta name="robots" content="noindex,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -46,7 +46,7 @@
         }
 
         .instructions-text {
-            color: #ec5840;
+            color: #cb181d;
             font-size: .8em;
             font-style: italic;
             text-align: center;
@@ -67,7 +67,7 @@
         }
 
         button.yadcf-filter-reset-button {
-            color: #ec5840;
+            color: #cb181d;
             margin-left: 10px;
         }
 
@@ -152,21 +152,22 @@
         }
 
         .info-button {
-        	text-transform: uppercase;
-        	font-weight: bold;
-        	padding: 8px;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 4px;
+            line-height: 17px;
         }
         </style>
     </head>
 
 <body>
     <div id="main-container">
-        <div class="topcorner"><a data-open="info-modal"><button type="button" class="alert button info-button">Information</button></a></div>
+        <div class="topcorner"><a data-open="info-modal"><button type="button" class="alert button info-button">Click for<br>information</button></a></div>
         <div id="lockdowns-table-container">
             <div class="row">
                 <div class="large-12 columns">
                     <h2 class="table-title">Colorado School Immunization Database</h2>
-                    <p class="body-text"><p>Below is a database of vaccination rates at schools across Colorado for 2017-18 school year.</p>
+                    <p class="body-text"><p>The database below contains vaccination rates for schools, preschools and child care centers across Colorado for the 2017-18 school year.</p>
                     <p>The state’s low vaccination rate has come under scrutiny this year as state lawmakers debated a bill that would have made it harder to opt out of such shots. The bill failed, but the low immunization rate remains a flashpoint as measles outbreaks hit communities across the nation.</p>
                     <p>Colorado has one of the lowest immunization rates for the measles, mumps and rubella (MMR) vaccine. Only 88.7 percent of kindergarteners received the measles, mumps and rubella vaccine during the 2017-2018 school year, meaning the state misses the threshold needed for “herd immunity,” according to the U.S. Centers for Disease Control.</p>
                     <p>A community needs to have “herd immunity” for a population to be protected from a measles outbreak. The state health department puts the threshold for “herd immunity” at 92 to 94 percent. However, some health experts say at least a 95 percent vaccination rate is needed to keep a population safe from measles.</p>
@@ -177,7 +178,7 @@
             <div id="filters">
                 <div class="row">
                     <div class="large-2 medium-2 small-6 columns">
-                        <p id="filter-1"><span class="filter-description">Choose school district or county</span></p>
+                        <p id="filter-1"><span class="filter-description">Choose district or county</span></p>
                     </div>
                     <div class="large-2 medium-2 small-6 columns">
                         <p id="filter-2"><span class="filter-description">Choose school category</span></p>
@@ -264,7 +265,7 @@
         $(document).ready(function() {
             function disableDependentFilter(level, inuse) {
                 if (level < 4) {
-                    filter = $('#yadcf-filter--example-' + level);
+                    filter = $('#yadcf-filter-immunizat' + level);
                     yadcf.exResetFilters(immunizationTable, [level]);
                     filter.prop('disabled', !inuse);
 
